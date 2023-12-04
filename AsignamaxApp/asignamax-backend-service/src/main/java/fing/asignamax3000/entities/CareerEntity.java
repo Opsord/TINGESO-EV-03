@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class CareerEntity {
 
     @Id
-    private long careerCode;
+    private Long careerCode;
 
     private String careerName;
 

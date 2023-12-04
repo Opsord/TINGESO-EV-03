@@ -32,7 +32,7 @@ public class CourseEntity {
         private String coursePlan;
 
         @ElementCollection
-        private List<Integer> coursePreRequisites;
+        private List<Long> coursePreRequisite;
 
         @ElementCollection
         private List<String> courseSchedule;

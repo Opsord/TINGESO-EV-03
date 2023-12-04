@@ -31,8 +31,4 @@ public class StudentEntity {
 
     @ElementCollection
     private List<Long> studentCurrentCourses;
-
-    @ElementCollection
-    private List<Long> studentScores;
-
 }

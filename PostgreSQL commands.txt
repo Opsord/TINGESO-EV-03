@@ -1,0 +1,7 @@
+Commands for the svc files
+
+"carreras" file:
+
+COPY Public."careers" FROM 'C:\Users\andre\Downloads\BD_Eval3\carreras.csv' DELIMITER ';' CSV HEADER ;
+
+select * FROM careers
