@@ -34,6 +34,8 @@ public class CourseEntity {
         @ElementCollection
         private List<Long> coursePreRequisite;
 
+        // Course schedule defined as a list of strings
+        // Each string is a day of the week, followed by a "-", followed by a block of time
         @ElementCollection
         private List<String> courseSchedule;
 

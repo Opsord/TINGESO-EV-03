@@ -18,4 +18,14 @@ public class ScoreService {
         return scoreRepository.findAllByStudentRut(studentRut);
     }
 
+    // Find all scores lower than 4.0 by student rut
+    public List<ScoreEntity> findReprovedScoresByStudentRut(String studentRut) {
+        return scoreRepository.findAllByStudentRutAndReproved(studentRut);
+    }
+
+    // Find all scores equal or greater than 4.0 by student rut
+    public List<ScoreEntity> findApprovedScoresByStudentRut(String studentRut) {
+        return scoreRepository.findAllByStudentRutAndApproved(studentRut);
+    }
+
 }
