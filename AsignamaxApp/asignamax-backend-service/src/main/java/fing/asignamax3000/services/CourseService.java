@@ -1,6 +1,7 @@
 package fing.asignamax3000.services;
 
 import fing.asignamax3000.entities.CourseEntity;
+import fing.asignamax3000.entities.StudentEntity;
 import fing.asignamax3000.repositories.CourseRepository;
 
 import java.util.ArrayList;
@@ -117,4 +118,8 @@ public class CourseService {
         return allSchedules;
     }
 
+    // Get a list of students enrolled in a course
+    public List<StudentEntity> getStudentsByCourse(long courseCode) {
+        return courseRepository.findAllStudentsByCourse(courseCode);
+    }
 }

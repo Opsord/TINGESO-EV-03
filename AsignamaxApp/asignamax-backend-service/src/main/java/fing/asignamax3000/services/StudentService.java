@@ -25,4 +25,5 @@ public class StudentService {
         // Save the student
         studentRepository.save(student);
     }
+
 }

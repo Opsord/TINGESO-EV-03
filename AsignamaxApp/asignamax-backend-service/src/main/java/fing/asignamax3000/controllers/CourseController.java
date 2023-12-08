@@ -1,6 +1,7 @@
 package fing.asignamax3000.controllers;
 
 import fing.asignamax3000.entities.CourseEntity;
+import fing.asignamax3000.entities.StudentEntity;
 import fing.asignamax3000.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -69,6 +70,15 @@ public class CourseController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(courseService.getAvailableSchedulesByLevel(level));
+    }
+
+    // Get all students enrolled in a course
+    @GetMapping("/students/{code}")
+    public ResponseEntity<List<StudentEntity>> findAllStudentsByCourse(@PathVariable("code") Long code) {
+        if (courseService.getStudentsByCourse(code).isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(courseService.getStudentsByCourse(code));
     }
 
 }
