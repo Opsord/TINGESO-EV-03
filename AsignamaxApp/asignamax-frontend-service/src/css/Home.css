@@ -1,0 +1,36 @@
+.MainDiv{
+    height: 100vh;
+}
+
+.PageBody{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #92d9eb;
+}
+
+.OptionsContainer{
+    display: flex;
+    margin: 10px auto;
+    height: 50%;
+}
+
+.TableContainer{
+    margin: 20px auto;
+    width: 45%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+    
+}
+
+.InfoContainer{
+    margin: 20px auto;
+    width: 45%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+}

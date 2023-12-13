@@ -16,6 +16,11 @@ public class StudentService {
         return studentRepository.findByRut(rut);
     }
 
+    // Find all students
+    public Iterable<StudentEntity> findAll() {
+        return studentRepository.findAll();
+    }
+
     // Inscribe a student in a course
     public void inscribeCourse(String studentRUT, long courseCode) {
         // Find the student
