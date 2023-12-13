@@ -5,19 +5,26 @@ import fing.asignamax3000.entities.StudentEntity;
 import fing.asignamax3000.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/courses")
 public class CourseController {
 
     @Autowired
     private CourseService courseService;
+
+    Logger logger = Logger.getLogger(getClass().getName());
+
+    // Find all courses
+    @GetMapping
+    public ResponseEntity<Iterable<CourseEntity>> findAll() {
+        return ResponseEntity.ok(courseService.findAll());
+    }
 
     // Get a course by code
     @GetMapping("/{code}")
@@ -30,11 +37,12 @@ public class CourseController {
 
     // Get all prerequisites given a course code
     @GetMapping("/prerequisites/{code}")
-    public ResponseEntity<List<Long>> findPrerequisitesByCode(@PathVariable("code") long code) {
-        if (courseService.findPrerequisitesIDByCode(code).isEmpty()) {
+    public ResponseEntity<List<CourseEntity>> findPrerequisitesByCode(@PathVariable("code") long code) {
+        if (courseService.findPrerequisiteCoursesByCode(code).isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(courseService.findPrerequisitesIDByCode(code));
+        logger.info("Found prerequisites for course " + code);
+        return ResponseEntity.ok(courseService.findPrerequisiteCoursesByCode(code));
     }
 
     // Get all courses by level

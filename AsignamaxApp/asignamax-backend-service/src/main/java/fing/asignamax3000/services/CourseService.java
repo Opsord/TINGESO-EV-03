@@ -42,6 +42,11 @@ public class CourseService {
         return false;
     }
 
+    // Find all courses
+    public Iterable<CourseEntity> findAll() {
+        return courseRepository.findAll();
+    }
+
     // Find a course by code
     public CourseEntity findByCode(long courseCode) {
         return courseRepository.findById(courseCode).orElse(null);
@@ -50,6 +55,16 @@ public class CourseService {
     // Find a course´s prerequisites id by course code
     public List<Long> findPrerequisitesIDByCode(long courseCode) {
         return courseRepository.findPrerequisitesByCode(courseCode);
+    }
+
+    // Find course´s pre requisites
+    public List<CourseEntity> findPrerequisiteCoursesByCode(long courseCode){
+        List<Long> prerequisitesID = findPrerequisitesIDByCode(courseCode);
+        List<CourseEntity> prerequisiteCourses = new ArrayList<>();
+        for (Long id : prerequisitesID) {
+            prerequisiteCourses.add(findByCode(id));
+        }
+        return prerequisiteCourses;
     }
 
     // Find all courses by level

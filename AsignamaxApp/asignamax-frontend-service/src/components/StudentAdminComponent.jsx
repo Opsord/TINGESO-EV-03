@@ -187,7 +187,7 @@ export default function StudentListFunComponent() {
                       <button
                         className="input-plan-boton"
                         onClick={() => seeDetails(student.studentRUT)}>
-                        Details
+                        Detalles
                       </button>
                     </td>
                   </tr>
