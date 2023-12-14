@@ -14,12 +14,12 @@
 .OptionsContainer{
     display: flex;
     margin: 10px auto;
-    height: 50%;
+    height: 75%;
 }
 
 .TableContainer{
     margin: 20px auto;
-    width: 45%;
+    width: 75%;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
@@ -29,7 +29,7 @@
 
 .InfoContainer{
     margin: 20px auto;
-    width: 45%;
+    width: 75%;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);

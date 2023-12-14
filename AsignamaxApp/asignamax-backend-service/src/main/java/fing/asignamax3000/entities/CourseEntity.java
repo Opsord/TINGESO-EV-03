@@ -31,6 +31,10 @@ public class CourseEntity {
 
         private String coursePlan;
 
+        private int maxStudents;
+
+        private int currentStudents;
+
         @ElementCollection
         private List<Long> coursePreRequisite;
 

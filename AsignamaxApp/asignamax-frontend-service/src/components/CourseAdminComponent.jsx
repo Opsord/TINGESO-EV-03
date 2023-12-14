@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import Table from "react-bootstrap/Table";
-// import { useNavigate } from "react-router-dom";
 import CourseService from "../services/CourseService";
 import HeaderComponent from "./HeaderComponent01";
 import "../css/Home.css";
@@ -9,11 +9,15 @@ export default function CourseListComponent() {
   const initialState = {
     courseCode: "",
     courseList: [],
-    selectedCourseDetails: null,
-    coursePrerequisites: [],
   };
 
-  // const navigate = useNavigate();
+  // Declare the state variable and the function to update it
+  const navigate = useNavigate();
+
+  // Navegate to the course details page
+  const seeDetails = (courseCode) => {
+    navigate('/courses/' + courseCode);
+};
 
   const [input, setInput] = useState(initialState);
   const [searchQuery, setSearchQuery] = useState("");
@@ -30,26 +34,6 @@ export default function CourseListComponent() {
         console.log(error);
       });
   }, []);
-
-  // See course details
-  const seeDetails = async (courseCode) => {
-    try {
-      const details = await CourseService.getCourseByCode(courseCode);
-      console.log(details.data);
-      const prerequisites = await CourseService.getCoursePrerequisites(
-        courseCode
-      );
-      console.log(prerequisites.data);
-
-      setInput((prevInput) => ({
-        ...prevInput,
-        selectedCourseDetails: details.data,
-        coursePrerequisites: prerequisites.data.coursePreRequisite, // Assuming coursePreRequisite is the array of prerequisites
-      }));
-    } catch (error) {
-      console.error("Error fetching course details:", error);
-    }
-  };
 
   // Handle search input
   const handleSearch = (e) => {
@@ -168,6 +152,7 @@ export default function CourseListComponent() {
       </div>
 
       <div className="PageBody">
+
         <div className="TableContainer">
           <h1>Listado de cursos</h1>
           <input
@@ -197,7 +182,8 @@ export default function CourseListComponent() {
                     <td>
                       <button
                         className="input-plan-boton"
-                        onClick={() => seeDetails(course.courseCode)}>
+                        onClick={() => seeDetails(course.courseCode)}
+                        >
                         Detalles
                       </button>
                     </td>
@@ -215,43 +201,9 @@ export default function CourseListComponent() {
             <ul className="pagination">{renderPageNumbers()}</ul>
           </nav>
         </div>
-
-        <div className="InfoContainer">
-          <h1>Información de cursos</h1>
-
-          {input.selectedCourseDetails ? (
-            <div>
-              <p>Codigo: {input.selectedCourseDetails.courseCode}</p>
-              <p>Nombre: {input.selectedCourseDetails.courseName}</p>
-              <p>
-                Codigo de carrera:{" "}
-                {input.selectedCourseDetails.courseCareerCode}
-              </p>
-              <p>Nivel: {input.selectedCourseDetails.courseLevel}</p>
-
-              {input.coursePrerequisites &&
-              input.coursePrerequisites.length > 0 ? (
-                <div>
-                  <p>Pre-requisitos:</p>
-                  <ul>
-                    {input.coursePrerequisites.map((prerequisite, index) => (
-                      <li key={prerequisite.courseCode}>
-                        <p>Codigo: {prerequisite.courseCode}</p>
-                        <p>Nombre: {prerequisite.courseName}</p>
-                        {/* Add other properties as needed */}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : (
-                <p>Sin pre requisitos</p>
-              )}
-            </div>
-          ) : (
-            <p>Seleccione un curso para ver los detalles.</p>
-          )}
-        </div>
+        
       </div>
+
     </div>
   );
 }

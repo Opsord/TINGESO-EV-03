@@ -5,6 +5,7 @@ import fing.asignamax3000.entities.StudentEntity;
 import fing.asignamax3000.repositories.CourseRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class CourseService {
     private CourseRepository courseRepository;
 
     // Possible course schedule days
-    private final String[] days = {"MON", "TUE", "WED", "THU", "FRI", "SAT"};
+    private final String[] days = {"LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO"};
 
     // Check if a day is valid
     public boolean isValidDay(String day) {
@@ -70,6 +71,15 @@ public class CourseService {
     // Find all courses by level
     public List<CourseEntity> findAllByLevel(int courseLevel) {
         return courseRepository.findAllByLevel(courseLevel);
+    }
+
+    // Find schedules for a course
+    public List<String> findSchedulesByCode(long courseCode) {
+        CourseEntity course = courseRepository.findById(courseCode).orElse(null);
+        if (course != null) {
+            return course.getCourseSchedule();
+        }
+        return Collections.emptyList();
     }
 
     // Add a schedule to a course
@@ -137,4 +147,15 @@ public class CourseService {
     public List<StudentEntity> getStudentsByCourse(long courseCode) {
         return courseRepository.findAllStudentsByCourse(courseCode);
     }
+
+    // Update current students number
+    public void updateCurrentStudents(long courseCode) {
+        CourseEntity course = courseRepository.findById(courseCode).orElse(null);
+        if (course != null) {
+            course.setCurrentStudents(course.getCurrentStudents());
+            courseRepository.save(course);
+        }
+    }
+
+
 }

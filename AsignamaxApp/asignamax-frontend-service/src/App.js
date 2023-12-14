@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomeComponent from "./components/HomeComponent";
 import StudentAdminComponent from "./components/StudentAdminComponent";
 import CourseAdminComponent from "./components/CourseAdminComponent";
+import CourseDetailsComponent from "./components/CourseDetailsComponent";
 
 function App() {
   return (
@@ -16,6 +17,11 @@ function App() {
           <Route path="/students" element={<StudentAdminComponent />} />
           {/* Course section */}
           <Route path="/courses" element={<CourseAdminComponent />} />
+          {/* Course details */}
+          <Route
+            path="/courses/:courseCode"
+            element={<CourseDetailsComponent />}
+          />
         </Routes>
       </Router>
     </div>

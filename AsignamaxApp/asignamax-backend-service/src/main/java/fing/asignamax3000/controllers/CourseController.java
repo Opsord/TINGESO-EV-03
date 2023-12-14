@@ -45,6 +45,16 @@ public class CourseController {
         return ResponseEntity.ok(courseService.findPrerequisiteCoursesByCode(code));
     }
 
+    // Get schedules for a course
+    @GetMapping("/schedules/{code}")
+    public ResponseEntity<List<String>> findSchedulesByCode(@PathVariable("code") long code) {
+        if (courseService.findSchedulesByCode(code).isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        logger.info("Found schedules for course " + code);
+        return ResponseEntity.ok(courseService.findSchedulesByCode(code));
+    }
+
     // Get all courses by level
     @GetMapping("/level/{level}")
     public ResponseEntity<List<CourseEntity>> findAllByLevel(@PathVariable("level") int level) {
